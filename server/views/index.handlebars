@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script src="./js/scripts.js"></script>
+    <title>House Search Result</title>
+</head>
+<body>
+    <table class="table">
+        <thead >
+            <tr>
+                <th>Image</th>
+                <th>Address</th>
+                <th>CV</th>
+                <th>Land value</th>
+                <th>Inprovement value</th>
+                <th>Floor</th>
+                <th>Land</th>
+                <th>Beds</th>
+                <th>Baths</th>
+                <th>Sale Method</th>
+                <th>New House</th>
+                <th>Comments</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each data}}
+            <tr>
+                <th>{{@key}}:{{this}}</th>
+            </tr>
+            {{/each}}
+
+        </tbody>
+    </table>
+
+    <ul class="pagination">
+        {{#each indexs}}
+            <li><a href="#">{{this}}</a></li>
+        {{/each}}
+    </ul>
+    
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>
