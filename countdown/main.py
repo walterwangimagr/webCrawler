@@ -46,7 +46,7 @@ time.sleep(4)
 height = browser.execute_script("return document.body.scrollHeight")
 browser.execute_script("window.scrollTo(0, document.body.scrollHeight);")
 
-time.sleep(40)
+time.sleep(80)
 
 
 page_source = browser.page_source
@@ -58,13 +58,25 @@ print(len(cards))
 "/html/body/wnz-content/div/wnz-saved-lists/div/main/product-grid/cdx-card[876]/product-stamp-grid/a/div[1]/figure/picture/img"
 id_description_dict = {}
 for card in cards:
-    img_src = card.xpath("./product-stamp-grid/a/div[1]/figure/picture/img/@src")
-    print(img_src)
+    #/html/body/wnz-content/div/wnz-saved-lists/div/main/product-grid/cdx-card[1]/product-stamp-grid/a/div[1]/figure/picture/img
+    # img_src = card.xpath("./product-stamp-grid/a/div[1]/figure/picture/img/@src")
+    # print(img_src)
     description = str(card.xpath("./product-stamp-grid/a/h3/text()")[0]).strip()
+    desp_2 = card.xpath("./product-stamp-grid/a/div[2]/product-price-meta/p//@aria-label")
+    if desp_2:
+        desp_2 = str(desp_2[0]).strip()
+    else:
+        desp_2 = None
+    price = card.xpath("./product-stamp-grid/a/div[2]/product-price/h3/@aria-label")
+    if price:
+        price = str(price[0]).strip()
+    else:
+        price = None
+    print(desp_2)
+    print(price)
     id = str(card.xpath("./product-stamp-grid/a/h3/@id")[0]).split("-")[1]
-    print(description)
-    print(id)
-    id_description_dict[id] = description
+
+    id_description_dict[id] = [description, desp_2, price]
 
 f =  open("id_descript.txt", 'w')
 f.write(json.dumps(id_description_dict))
